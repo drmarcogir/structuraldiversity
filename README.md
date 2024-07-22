@@ -12,11 +12,23 @@ The GitHub repository is organized to facilitate easy access to the code, data, 
 - **Folder Name:** `code`
 - **Description:** This folder contains the notebooks and R subfolders, containing Python and R code used to generate input data for analyses and manuscript figures, respectively.
 
+
+- **Folder Name:** `code`
+  - **Description:** This folder contains the notebooks and R subfolders, containing Python and R code used to generate input data for analyses and manuscript figures, respectively.
+
+ This folder contains the notebooks and R subfolders, containing Python and R code used to generate input data for analyses and manuscript figures, respectively.
+
+- **Folder Name:** `code`
+  
+  This folder contains the notebooks and R subfolders, containing Python and R code used to generate input data for analyses and manuscript figures, respectively.
+
+
+
 ```
 code/
-├── R/
-│   ├── analysis.R
-│   └── figures.R
-└── notebooks/
-    └── phenodiversity_GEE.ipynb
+├── notebooks/
+│   └── phenodiversity_GEE.ipynb
+└── R/
+    ├── analysis.R
+    └── figures.R
 ```
