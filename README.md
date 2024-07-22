@@ -6,15 +6,17 @@ This README provides an overview of the GitHub repository associated with the ma
 
 The GitHub repository is organized to facilitate easy access to the code, data, and results produced during the research process. The main components of the repository include:
 
+
+
+
 - **Folder Name:** `code`
-- **Description:** This folder contains R and Python scripts used to generate figures and visualizations related to the analysis.
+- **Description:** This folder contains the notebooks and R subfolders, containing Python and R code used to generate input data for analyses and manuscript figures, respectively.
 
 ```
-R/
-├── analysis.R
-└── figures.R
-
-notebooks/
-└── phenodiversity_GEE.ipynb
-
+code/
+├── R/
+│   ├── analysis.R
+│   └── figures.R
+└── notebooks/
+    └── phenodiversity_GEE.ipynb
 ```
