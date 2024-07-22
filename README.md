@@ -1,7 +1,6 @@
 ## Structural Diversity
 
-This README provides an overview of the GitHub repository associated with the manuscript titled 'A dataset on the structural diversity of European forests' by Girardello et al. (in review) The repository contains codes for data preparation and the production of the figures of the final paper.
-
+This README provides an overview of the GitHub repository associated with the manuscript titled 'A dataset on the structural diversity of European forests' by Girardello et al. (under review). The repository contains code for data preparation and figure creation for the manuscript.
 
 ## Repository Structure
 
