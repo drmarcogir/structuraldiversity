@@ -15,7 +15,7 @@ The GitHub repository is organized to facilitate easy access to the code, data, 
 ```
 code/
 ├── notebooks/
-│   └── phenodiversity_GEE.ipynb
+│   └── EarthEngine.ipynb
 └── R/
     ├── analysis.R
     └── figures.R
