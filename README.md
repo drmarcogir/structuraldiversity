@@ -1,6 +1,6 @@
-## Phenological Diversity
+## Structural Diversity
 
-This README provides an overview of the GitHub repository associated with the paper titled 'Patterns and Trends in the Spatial Heterogeneity of Land Surface Phenology of Global Forests' by Girardello et al., 2024, published in Environmental Research Communications. The repository contains R and Python code for calculating phenological diversity metrics and visualising phenological data.
+This README provides an overview of the GitHub repository associated with the manuscript titled 'A dataset on the structural diversity of European forests' by Girardello et al. (in review) The repository contains codes for data preparation and the production of the figures of the final paper.
 
 
 ## Repository Structure
