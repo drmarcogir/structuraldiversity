@@ -4,13 +4,7 @@ This README provides an overview of the GitHub repository associated with the ma
 
 ## Repository Structure
 
-The GitHub repository is organized to facilitate easy access to the code enance reproducibility of the results. The main components of the repository include:
-
-
-
-- **Folder Name:** `code`
-  
-  This folder contains the notebooks and R subfolders, containing Python and R code used to generate input data for analyses and manuscript figures, respectively.
+The GitHub repository is organized to facilitate easy access to the code and enhance the reproducibility of the results. The `code` folder contains the notebooks and R subfolders, which contain Python and R code used to generate input data for analyses and manuscript figures, respectively. The folder structure is as follows:
 
 ```
 code/
