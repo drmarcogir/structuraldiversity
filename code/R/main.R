@@ -1,4 +1,13 @@
-# load required libraries
+# -----------------------------------------------------------------------------
+# Script Name: Manuscript figure creation
+# Description: This script loads environmental data and 
+# generates visualizations for manuscript figures.
+# Author: Marco Girardello
+# Date: 2024-05-24
+# Version: 1.0
+# -----------------------------------------------------------------------------
+
+# load required packages
 library(tidyverse)
 library(sf)
 library(terra)
@@ -28,22 +37,22 @@ vars_5km <- readRDS("./data/vars_5km.rds")
 vars_1km <- readRDS("./data/vars_1km.rds")
 
 # predictor lookup table
-pred_all <- readRDS("./data/structure/variable_lookup/var_all_groups.rds")
+pred_all <- readRDS("./data/var_all_groups.rds")
 
 # response lookup table
-resp <- readRDS("./data/structure/variable_lookup/response_labels.rds")
+resp <- readRDS("./data/response_labels.rds")
 
 #### climate data
-envdat10km <- read_csv("./data/structure/climate/env_data_10km.csv")
-envdat5km <- read_csv("./data/structure/climate/env_data_5km.csv")
-envdat1km <- read_csv("./data/structure/climate/env_data_1km.csv")
+envdat10km <- readRDS("./data/envdat10km.rds")
+envdat5km <- readRDS("./data/envdat5km.rds")
+envdat1km <- readRDS("./data/envdat1km.rds")
 
 dat10kmenv <- inner_join(envdat10km,dat10km)
 dat5kmenv <- inner_join(envdat5km,dat5km)
 dat1kmenv <- inner_join(envdat1km,dat1km)
 
 # R2 - model performance
-validation_results <- read_csv("./data/structure/output_models/performance/performance.csv")
+validation_results <- readRDS("./data/validation_results.rds")
 
 # Fig. 2 maps --------------------------------------------------------------
 # 5km 
@@ -1003,105 +1012,3 @@ combined5km <- plotcombined &
 ggsave(combined5km, filename = "./results/strmodels/paper_figures/Fig1/SE5km.eps", bg = "white",
        width = 11, height = 12)
 
-
-# checks ------------------------------------------------------------------
-
-pred_lab =  pred_all
-resp_lab = resp
-
-spec_res <- vars_10km %>%
-  inner_join(pred_lab) %>%  
-  group_by(response, type_specific) %>%
-  summarise(count = n(), .groups = 'drop') %>%
-  group_by(response) %>%
-  mutate(total = sum(count)) %>%
-  ungroup() %>%
-  inner_join(resp_lab) %>%  
-  mutate(proportion = count / total) %>%
-  mutate(res = "10km") %>%
-  # 5km
-  bind_rows(vars_5km %>%
-              inner_join(pred_lab) %>%  
-              group_by(response, type_specific) %>%
-              summarise(count = n(), .groups = 'drop') %>%
-              group_by(response) %>%
-              mutate(total = sum(count)) %>%
-              ungroup() %>%
-              inner_join(resp_lab) %>%  
-              mutate(proportion = count / total) %>%
-              mutate(res = "5km")) %>%
-
-  # 1km
-   bind_rows(vars_1km %>%
-            inner_join(pred_lab) %>%  
-            group_by(response, type_specific) %>%
-            summarise(count = n(), .groups = 'drop') %>%
-            group_by(response) %>%
-            mutate(total = sum(count)) %>%
-            ungroup() %>%
-            inner_join(resp_lab) %>%  
-            mutate(proportion = count / total) %>%
-              mutate(res = "1km"))
-
-  
-spec_res %>%
-  group_by(res,type_specific) %>%
-  summarise(mean = mean(proportion)) %>%
-  ungroup() %>%
-  arrange(res,desc(mean))
-  
-validation_results %>%
-  group_by(resolution,type) %>%
-  summarise(min = min(R2),
-            max = max(R2))
-
-validation_results %>%
-  write_csv("/home/marco/Desktop/r2.csv")
-  filter(resolution == "10km") %>%
-  group_by(type,resolution,Metric) %>%
-  arrange(desc(R2))
-
-
-
-cc <- bind_rows(
-    vars_1km %>% mutate(Selected_1_km = TRUE),
-    vars_5km %>% mutate(Selected_5_km = TRUE),
-    vars_10km %>% mutate(Selected_10_km = TRUE)
-  ) %>%
-    group_by(predictor, response) %>%
-    summarize(
-      Selected_1_km = any(Selected_1_km, na.rm = TRUE),
-      Selected_5_km = any(Selected_5_km, na.rm = TRUE),
-      Selected_10_km = any(Selected_10_km, na.rm = TRUE),
-      .groups = 'drop'
-    ) %>%
-    mutate(
-      Selection_Pattern = case_when(
-        Selected_1_km & Selected_5_km & Selected_10_km ~ "Selected at 1 km, 5 km, and 10 km",
-        Selected_1_km & Selected_5_km & !Selected_10_km ~ "Selected at 1 km and 5 km",
-        Selected_1_km & !Selected_5_km & Selected_10_km ~ "Selected at 1 km and 10 km",
-        !Selected_1_km & Selected_5_km & Selected_10_km ~ "Selected at 5 km and 10 km",
-        Selected_1_km & !Selected_5_km & !Selected_10_km ~ "Selected at 1 km only",
-        !Selected_1_km & Selected_5_km & !Selected_10_km ~ "Selected at 5 km only",
-        !Selected_1_km & !Selected_5_km & Selected_10_km ~ "Selected at 10 km only",
-        TRUE ~ "Not Selected"
-      )
-    ) %>%
-    mutate(
-      Selection_Pattern = factor(Selection_Pattern, levels = c(
-        "Selected at 1 km, 5 km, and 10 km",
-        "Selected at 1 km only",
-        "Selected at 5 km only",
-        "Selected at 10 km only",
-        "Selected at 1 km and 5 km",
-        "Selected at 1 km and 10 km",
-        "Selected at 5 km and 10 km"
-      ))
-    ) %>%
-    inner_join(resp)
-
-cc %>%
-  group_by(predictor) %>%
-  summarise(n = n()) %>%
-  arrange(desc(n))
-  
