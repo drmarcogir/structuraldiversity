@@ -4,7 +4,7 @@ This README provides an overview of the GitHub repository associated with the ma
 
 ## Repository Structure
 
-The GitHub repository is organized to facilitate easy access to the code, data, and results produced during the research process. The main components of the repository include:
+The GitHub repository is organized to facilitate easy access to the code enance reproducibility of the results. The main components of the repository include:
 
 
 
