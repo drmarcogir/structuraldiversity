@@ -11,6 +11,6 @@ code/
 ├── notebooks/
 │   └── EarthEngine.ipynb
 └── R/
-    ├── analysis.R
-    └── figures.R
+    ├── main.R
+    └── functions.R
 ```
