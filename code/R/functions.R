@@ -1,6 +1,45 @@
-# functions ---------------------------------------------------------------
+# functions.R
+# 
+# This script contains a collection of R functions used in the manuscript titled 
+# 'A dataset on the structural diversity of European forests' by Marco Girardello et al. 
+# (under review). The functions provided here are designed to assist in the data 
+# preparation, analysis, and visualization processes as described in the manuscript.
+#
+# Usage:
+# This script is automatically sourced via the .Rprofile file in the repository, so 
+# there is no need to manually source it in your R environment. The functions will be 
+# available for use throughout your analysis scripts.
+#
+# Functions included:
+# A variety of functions are included to handle different aspects of the data analysis 
+# and visualization tasks. Due to the complexity and number of functions, brief 
+# descriptions are not provided here. Please refer to the function definitions and 
+# inline comments for details on usage and parameters.
+#
+# Dependencies:
+# Ensure that the following R packages are installed and loaded in your environment:
+# - tidyverse
+# - sf
+# - terra
+# - viridis
+# - scales
+# - patchwork
+# - factoextra
+# - ggrepel
+# - ggcorrplot
+#
+# Authors: Marco Girardello
+# Date: 2024-07-23
+#
+# License:
+# This script is released under the [License Name] license. For more details, see the 
+# LICENSE file in the repository.
+#
+# Note:
+# Please report any issues or bugs on the GitHub repository issues page.
 
 
+# PCA plot function
 pca_wrap <- function(indat,arrow_scale,res_flag = FALSE) {
   
   # Compute PCA, excluding 'x' and 'y' columns
